@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #013941;
+  --color-secondary: #e0e0e0;
+}
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("./assets/fonts/ClashDisplay-Bold.otf") format("otf"),
+    url("./assets/fonts/ClashDisplay-Variable.ttf") format("ttf");
+  font-style: normal;
+/* Ensures text remains visible during font load */
+}
+
+
+
+.clash-font {
+ font-family: "Clash Display", sans-serif;
+}
+
+.instrument-font {
+  font-family: "Instrument Sans", sans-serif;
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
