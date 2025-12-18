@@ -1,9 +1,7 @@
-import  type { ButtonHTMLAttributes } from "react";
+import type { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?:
-    | "primary"
-    | "secondary"
+  variant?: "primary" | "secondary";
 }
 
 export default function Button({
@@ -12,7 +10,7 @@ export default function Button({
   variant = "primary",
   disabled = false,
   className = "",
-  type,
+  type = "button",
   ...rest
 }: ButtonProps) {
   const variantStyle =
@@ -24,7 +22,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`w-full rounded-[30px] py-5 px-10 text-center font-bold text-[16px] instrument-font ${variantStyle} `}
+      className={`w-full rounded-[30px] py-5 px-10 text-center font-bold text-[16px] instrument-font ${variantStyle} ${className}`}
       disabled={disabled}
       onClick={onClick}
       {...rest}

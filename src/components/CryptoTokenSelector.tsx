@@ -1,12 +1,8 @@
-import  { useState, useEffect, useRef } from 'react';
-import { FiSearch, FiChevronDown } from 'react-icons/fi';
+import { useState, useRef, useEffect } from "react";
+import { FiSearch, FiChevronDown } from "react-icons/fi";
+import type { TokenPair as BaseTokenPair } from "../types/token";
 
-
-interface TokenPair {
-  id: number;
-  name: string;
-  chain: string;
-  logoUrl: string;
+interface TokenPair extends BaseTokenPair {
   isSelected: boolean;
 }
 
@@ -46,23 +42,14 @@ interface CryptoTokenSelectorProps {
 
 const CryptoTokenSelector = ({ onChange }: CryptoTokenSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredPairs, setFilteredPairs] = useState<TokenPair[]>(tokenPairs);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedPair, setSelectedPair] = useState<TokenPair>(
     tokenPairs.find(p => p.isSelected) || tokenPairs[0]
   );
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  
-  useEffect(() => {
-    const filtered = tokenPairs.filter(pair => 
-      pair.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredPairs(filtered);
-  }, [searchQuery]);
-
-  
+  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -74,12 +61,15 @@ const CryptoTokenSelector = ({ onChange }: CryptoTokenSelectorProps) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  
   const handleSelectPair = (pair: TokenPair) => {
     setSelectedPair(pair);
     onChange?.(pair);
     setIsOpen(false); 
   };
+
+  const filteredPairs = tokenPairs.filter((pair) =>
+    pair.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="w-72 relative" ref={dropdownRef}>

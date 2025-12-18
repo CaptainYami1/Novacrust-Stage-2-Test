@@ -1,5 +1,5 @@
 import { ArrowLeft } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import InputSelectorDropdown from "../../components/InputSelectorDropDown";
 import { TextInput } from "../../components/TextInput";
 import Button from "../../components/Button";
@@ -11,7 +11,7 @@ interface BankOption {
   id: string;
   name: string;
   description?: string;
-  icon: JSX.Element;
+  icon: ReactNode;
   isOther?: boolean;
 }
 const BankOptions: BankOption[] = [
@@ -49,24 +49,25 @@ export const RecipientDetail = () => {
     phone: "",
   });
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
-    if (!bank) {
-      toast.error("Please select a bank");
-      return;
-    }
-    if (!accountNumber) {
-      toast.error("Please enter an account number");
-      return;
-    }
-    if (!accountName) {
-      toast.error("Please enter an account name");
-      return;
-    }
+    if (inputType === "AccountInfo") {
+      if (!bank) {
+        toast.error("Please select a bank");
+        return;
+      }
+      if (!accountNumber) {
+        toast.error("Please enter an account number");
+        return;
+      }
+      if (!accountName) {
+        toast.error("Please enter an account name");
+        return;
+      }
 
-    if (bank && accountNumber && accountName) {
       setInputType("ContactInfo");
+      return;
     }
 
     if (!email) {
@@ -74,9 +75,7 @@ export const RecipientDetail = () => {
       return;
     }
 
-    if (bank && accountNumber && accountName && email ) {
-      navigate("/crypto-address");
-    }
+    navigate("/crypto-address");
   };
   return (
     <div className="bg-white border border-[#CCF6E5] h-[90%] border-solid rounded-[30px] max-w-160 mx-auto w-full px-16 pt-10 pb-14 flex flex-col justify-between">

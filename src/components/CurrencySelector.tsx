@@ -1,14 +1,14 @@
-import  { useState, useEffect, useRef } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
+import { useState, useEffect, useRef } from "react";
+import { FiChevronDown } from "react-icons/fi";
 
-interface currencyPair {
+interface CurrencyPair {
   id: number;
   name: string;
   logoUrl: string;
   isSelected: boolean;
 }
 
-const currencyPairs: currencyPair[] = [
+const currencyPairs: CurrencyPair[] = [
    {
     id: 0, 
     name: 'NGN', 
@@ -31,16 +31,11 @@ const currencyPairs: currencyPair[] = [
 
 const CurrencySelector = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [filteredPairs, setFilteredPairs] = useState<currencyPair[]>(currencyPairs);
-  const [selectedPair, setSelectedPair] = useState<currencyPair>(
+  const [selectedPair, setSelectedPair] = useState<CurrencyPair>(
     currencyPairs.find(p => p.isSelected) || currencyPairs[0]
   );
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  
-  
-
   
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -54,7 +49,7 @@ const CurrencySelector = () => {
   }, []);
 
   
-  const handleSelectPair = (pair: currencyPair) => {
+  const handleSelectPair = (pair: CurrencyPair) => {
     setSelectedPair(pair);
     setIsOpen(false); 
   };
@@ -85,7 +80,7 @@ const CurrencySelector = () => {
         <div className="absolute top-full  right-0 bg-white rounded-[20px] shadow-lg border border-gray-200 z-50 p-3 w-fit">
        
           <div className="max-h-80 overflow-y-auto">
-            {filteredPairs.map((pair) => (
+            {currencyPairs.map((pair) => (
               <div
                 key={pair.id}
                 onClick={() => handleSelectPair(pair)}

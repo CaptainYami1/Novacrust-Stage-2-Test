@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router";
 
 export const Success = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const handleSubmit = () => {
     navigate("/");
   };

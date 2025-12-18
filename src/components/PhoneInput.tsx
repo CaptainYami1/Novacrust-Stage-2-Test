@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 type PhoneValue = {
   countryCode: string;
   phone: string;
@@ -11,9 +9,6 @@ type PhoneInputProps = {
 };
 
 export default function PhoneInput({ value, onChange }: PhoneInputProps) {
-  const [countryCode, setCountryCode] = useState("+234");
-  const [phone, setPhone] = useState("");
-
   return (
     <div className="flex flex-col gap-4">
       <label className="text-primary font-medium outfit-font">Recipient phone number</label>
@@ -22,8 +17,13 @@ export default function PhoneInput({ value, onChange }: PhoneInputProps) {
         <select
         title="phone"
           className="flex items-center gap-2 mr-4 bg-transparent outline-none border-none focus:ring-0 border-r border"
-          value={countryCode}
-          onChange={(e) => setCountryCode(e.target.value)}
+          value={value.countryCode}
+          onChange={(e) =>
+            onChange({
+              ...value,
+              countryCode: e.target.value,
+            })
+          }
         >
           <option value="+234">+234 🇳🇬 </option>
           <option value="+233">+233 🇬🇭 </option>
@@ -33,8 +33,13 @@ export default function PhoneInput({ value, onChange }: PhoneInputProps) {
         <input
           type="tel"
           placeholder="906 326 8609"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          value={value.phone}
+          onChange={(e) =>
+            onChange({
+              ...value,
+              phone: e.target.value,
+            })
+          }
           className="focus:outline-none focus:border-transparent outfit-font"
         />
       </div>

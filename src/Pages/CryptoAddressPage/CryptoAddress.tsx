@@ -4,7 +4,7 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router";
 
 export const CryptoAddress = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const handleSubmit = () => {
     navigate("/success");
   };
@@ -42,8 +42,8 @@ export const CryptoAddress = () => {
       <div className="flex items-start gap-2 w-full mt-6 mb-40">
         <CircleAlert size={24} color="#013941" />
         <p className="text-sm text-[#4F4F4F]">
-          Only send USDT to this address. Ensure the sender is on
-          the CELO network otherwise you might lose your deposit
+          Only send ETH to this address. Ensure the sender is on the ETH network
+          otherwise you might lose your deposit.
         </p>
       </div>
       <Button variant="primary" onClick={handleSubmit}>

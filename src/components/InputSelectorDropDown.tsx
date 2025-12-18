@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { FiChevronDown } from "react-icons/fi";
 
 interface InputSelectorDropdownProps<T> {
@@ -8,7 +8,9 @@ interface InputSelectorDropdownProps<T> {
   onSelect?: (input: T) => void; // ✅ generic type
 }
 
-function InputSelectorDropdown<T extends { id: string; name: string; description?: string; icon: JSX.Element }>({
+function InputSelectorDropdown<
+  T extends { id: string; name: string; description?: string; icon: ReactNode }
+>({
   InputOption,
   title,
   selectedInput,
@@ -19,7 +21,10 @@ function InputSelectorDropdown<T extends { id: string; name: string; description
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -45,10 +50,15 @@ function InputSelectorDropdown<T extends { id: string; name: string; description
       <p className="text-primary font-medium outfit-font">{title}</p>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full px-6 py-5 border border-gray-200 rounded-[30px] cursor-pointer hover:bg-gray-50 transition-colors text-left"
+        className="flex items-center justify-between w-full text-primary px-6 py-5 border border-gray-200 rounded-[30px] cursor-pointer hover:bg-gray-50 transition-colors text-left"
       >
         {selectedInput ? selectedInput.name : `Select ${title}`}
-        <FiChevronDown className={`text-primary transition-transform ${isOpen ? "rotate-180" : ""}`} size={20} />
+        <FiChevronDown
+          className={`text-primary transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          size={20}
+        />
       </button>
 
       {isOpen && (
@@ -64,7 +74,11 @@ function InputSelectorDropdown<T extends { id: string; name: string; description
               <div className="shrink-0">{input.icon}</div>
               <div>
                 <div className="font-medium text-sm">{input.name}</div>
-                {input.description && <div className="text-xs text-gray-500">{input.description}</div>}
+                {input.description && (
+                  <div className="text-xs text-gray-500">
+                    {input.description}
+                  </div>
+                )}
               </div>
             </div>
           ))}
