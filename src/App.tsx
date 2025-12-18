@@ -5,31 +5,34 @@ import { Routes, Route } from "react-router";
 import { RecipientDetail } from "./Pages/RecipientDetails/RecipientDetail";
 import { CryptoAddress } from "./Pages/CryptoAddressPage/CryptoAddress";
 import { Success } from "./Pages/SuccessPage/Success";
+import { TokenProvider } from "./context/TokenContext";
 
 function App() {
   return (
     <>
-      <div className="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen w-full mx-auto flex items-center justify-center">
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          transition={Bounce}
-        />
-        <Routes>
-          <Route path="/" element={<CryptoWidget />} />
-          <Route path="/recepient-details" element={<RecipientDetail />} />
-          <Route path="/crypto-address" element={<CryptoAddress />} />
-          <Route path="/success" element={<Success />} />
-        </Routes>
-      </div>
+      <TokenProvider>
+        <div className="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen w-full mx-auto flex items-center justify-center">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+          />
+          <Routes>
+            <Route path="/" element={<CryptoWidget />} />
+            <Route path="/recepient-details" element={<RecipientDetail />} />
+            <Route path="/crypto-address" element={<CryptoAddress />} />
+            <Route path="/success" element={<Success />} />
+          </Routes>
+        </div>
+      </TokenProvider>
     </>
   );
 }

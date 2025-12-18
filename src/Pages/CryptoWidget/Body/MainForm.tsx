@@ -102,7 +102,13 @@ const ReceiveOptions: ReceiveOption[] = [
 
 export const MainForm = () => {
   const [payAmount, setPayAmount] = useState("");
-  const [selectedToken, setSelectedToken] = useState<TokenPair | null>(null);
+  const [selectedToken, setSelectedToken] = useState<TokenPair | null>({
+    id: 0,
+    name: "ETH",
+    chain: "ETH",
+    logoUrl:
+      "https://cdn.prod.website-files.com/6683c774a6e7a5003c5889c3/669f0c2991541075936aa5b8_What%20is%20ETH_.png",
+  });
   const [payFrom, setPayFrom] = useState<WalletOption | undefined>();
   const [receiveTO, setReceiveTO] = useState<ReceiveOption | undefined>();
   const TOKEN_RATES: Record<string, number> = {

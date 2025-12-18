@@ -2,18 +2,25 @@ import { ArrowLeft, CircleAlert, Copy } from "lucide-react";
 import Button from "../../components/Button";
 
 import { useNavigate } from "react-router";
+import { useToken } from "../../context/TokenContext";
 
 export const CryptoAddress = () => {
   const navigate = useNavigate();
+  const { selectedPair } = useToken();
+
+  const tokenName = selectedPair?.name ?? "ETH";
+  const tokenChain = selectedPair?.chain ?? "ETH";
+
   const handleSubmit = () => {
     navigate("/success");
   };
+
   return (
     <div className="bg-white border border-[#CCF6E5] border-solid rounded-[30px] max-w-160 mx-auto w-full px-16 pt-10 pb-14 flex flex-col justify-between items-center">
       <div className="flex flex-row items-center mb-10 w-full">
         <ArrowLeft size={24} onClick={() => navigate(-1)} />{" "}
         <h2 className="font-medium text-xl text-primary w-full text-center ">
-          Send ETH to the address below
+          Send {tokenName} to the address below
         </h2>{" "}
       </div>
 
@@ -25,13 +32,13 @@ export const CryptoAddress = () => {
         <div className="flex flex-row justify-between items-center">
           <p className="text-sm text-[#4F4F4F]">Amount to send</p>
           <div className="flex flex-row items-center gap-2">
-            <p className="text-primary">100 ETH</p>{" "}
+            <p className="text-primary">100 {tokenName}</p>{" "}
             <Copy color="#013941" size={24} />
           </div>
         </div>
         <div className="flex flex-row justify-between items-center">
           <p className="text-sm text-[#4F4F4F]">Network</p>
-          <p className="text-primary"> ETH</p>
+          <p className="text-primary">{tokenChain}</p>
         </div>
         <div className="flex flex-row justify-between items-center">
           <p className="text-sm text-[#4F4F4F]">Wallet</p>
@@ -42,8 +49,8 @@ export const CryptoAddress = () => {
       <div className="flex items-start gap-2 w-full mt-6 mb-40">
         <CircleAlert size={24} color="#013941" />
         <p className="text-sm text-[#4F4F4F]">
-          Only send ETH to this address. Ensure the sender is on the ETH network
-          otherwise you might lose your deposit.
+          Only send {tokenName} to this address. Ensure the sender is on the{" "}
+          {tokenChain} network otherwise you might lose your deposit.
         </p>
       </div>
       <Button variant="primary" onClick={handleSubmit}>
