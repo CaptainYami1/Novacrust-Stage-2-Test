@@ -78,7 +78,7 @@ export const RecipientDetail = () => {
     navigate("/crypto-address");
   };
   return (
-    <div className="bg-white border border-[#CCF6E5] h-[90%] border-solid rounded-[30px] max-w-160 mx-auto w-full px-16 pt-10 pb-14 flex flex-col justify-between">
+    <div className="bg-white border border-[#CCF6E5] h-[90%] border-solid gap-10 rounded-[30px] max-w-160 mx-auto w-full px-16 pt-10 pb-14 flex flex-col justify-between">
       <div className="">
         <div className="flex flex-row items-center mb-10">
           <ArrowLeft
@@ -122,7 +122,7 @@ export const RecipientDetail = () => {
           )}
 
           {inputType === "ContactInfo" && (
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 mb-25">
               <TextInput
                 htmlFor="Recipient email"
                 label="Recipient email"
